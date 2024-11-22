@@ -13,7 +13,7 @@ const App = () => {
     { email: 'test@example.com', studentNumber: '123456' },
     { email: 'john.doe@example.com', studentNumber: '654321' },
   ];
-
+  
   const images = [
     './assets/01.jpg?text=Image+1',
     './assets/02.jpg?text=Image+2',
