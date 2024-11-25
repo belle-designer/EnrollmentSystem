@@ -1,10 +1,9 @@
-// usersDB.js
 export const usersDB = [
   {
     email: 'bc.student.nama@cvsu.edu.ph',
     userID: 'student123',
     role: 'Student',
-    password: '123', // Simulated password for Student
+    password: '123', 
     hasStudentNumber: true,
     hasAdminNumber: false,
     hasOfficerNumber: false,
@@ -13,7 +12,7 @@ export const usersDB = [
     email: 'admin@example.com',
     userID: 'admin789',
     role: 'Admin',
-    password: 'adminPassword123', // Simulated password for Admin
+    password: 'adminPassword123', 
     hasStudentNumber: false,
     hasAdminNumber: true,
     hasOfficerNumber: false,
@@ -22,7 +21,7 @@ export const usersDB = [
     email: 'officer@example.com',
     userID: 'officer456',
     role: 'Officer',
-    password: '123', // Simulated password for Officer
+    password: '123', 
     hasStudentNumber: false,
     hasAdminNumber: false,
     hasOfficerNumber: true,
@@ -31,17 +30,16 @@ export const usersDB = [
     email: 'new@example.com',
     userID: 'student123',
     role: 'Student',
-    password: '123', // Simulated password for Student
+    password: '123', 
     hasStudentNumber: false,
     hasAdminNumber: false,
     hasOfficerNumber: false,
   },
 ];
 
-// usersDB.js
 export const getUserData = (emailOrUserID, password) => {
   if (!emailOrUserID) {
-    return null; // If emailOrUserID is undefined, return null to prevent errors
+    return null; 
   }
 
   const user = usersDB.find(

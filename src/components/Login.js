@@ -51,7 +51,6 @@ const Login = ({ setUser }) => {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // Email validation
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailRegex.test(emailOrUserID)) {
       setPopupMessage('Please enter a valid email address.');
@@ -59,18 +58,16 @@ const Login = ({ setUser }) => {
     }
 
     if (isRegistering) {
-      // Password match validation
       if (password !== retypePassword) {
         setPopupMessage('Passwords do not match.');
         return;
       }
 
-      // Password strength validation
       if (
-        password.length < 8 || // Minimum 8 characters
-        !/[A-Z]/.test(password) || // At least one uppercase letter
-        !/[a-z]/.test(password) || // At least one lowercase letter
-        !/[!@#$%^&*()]/.test(password) // At least one special character
+        password.length < 8 || 
+        !/[A-Z]/.test(password) || 
+        !/[a-z]/.test(password) || 
+        !/[!@#$%^&*()]/.test(password) 
       ) {
         setPopupMessage(
           'Password must be at least 8 characters long, include one uppercase letter, one lowercase letter, and one special character.'
@@ -81,24 +78,22 @@ const Login = ({ setUser }) => {
       const newUser = {
         email: emailOrUserID,
         password: password,
-        role: 'Student', // Default role
+        role: 'Student', 
       };
 
       try {
-        // API call for registration
         const response = await axios.post('http://localhost:5000/api/auth/signup', newUser);
         setPopupMessage('Registration successful!');
         setEmailOrUserID('');
         setPassword('');
         setRetypePassword('');
         setErrorMessage('');
-        setIsRegistering(false); // Switch to login form
+        setIsRegistering(false);
       } catch (err) {
         const errorMessage = err.response?.data?.error || 'Error during registration. Please try again.';
         setPopupMessage(errorMessage);
       }
     } else {
-      // Handle Login Logic
       try {
         const response = await axios.post('http://localhost:5000/api/auth/login', {
           email: emailOrUserID,
@@ -107,14 +102,11 @@ const Login = ({ setUser }) => {
         
         const { role, adminum, officernum, email } = response.data;
   
-        // Set user data
         setUser({ email: emailOrUserID, role });
         setPopupMessage('Login successful!');
         
-        // Save user data to localStorage for persistence
         localStorage.setItem('user', JSON.stringify({ email: emailOrUserID, role }));
   
-        // Navigate to dashboard after successful login
         navigate('/dashboard');
       } catch (err) {
         const errorMessage = err.response?.data?.error || 'Invalid login credentials.';
@@ -129,7 +121,7 @@ const Login = ({ setUser }) => {
       style={{ backgroundImage: 'url(/assets/Cvsu.jpg)' }}
     >
       <div className="flex w-full p-3 max-w-5xl bg-white rounded-lg shadow-lg">
-        {/* Left Image Section with Slider */}
+        {}
         <div className="w-1/2 p-2 flex justify-center items-center relative">
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
             {images.map((_, index) => (
@@ -152,7 +144,7 @@ const Login = ({ setUser }) => {
           />
         </div>
 
-        {/* Right Form Section */}
+        {}
         <div className="w-1/2 p-2 flex justify-center items-center">
           <div className="w-full max-w-md space-y-4">
             <h2 className="text-2xl font-semibold text-center mb-6">
@@ -203,89 +195,89 @@ const Login = ({ setUser }) => {
                 </div>
               )}
 
-{isRegistering && (
-  <>
-    {/* Password and Retype Password Fields Side by Side */}
-    <div className="flex space-x-4">
-      {/* Password Field with Requirements and Toggle */}
-      <div className="relative flex-1">
-        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
-          Password:
-        </label>
-        <input
-          id="password"
-          type={showPassword ? 'text' : 'password'}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="signup-password-field w-full px-4 py-2 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <button
-          type="button"
-          onClick={() => setShowPassword((prev) => !prev)}
-          className="absolute top-9 right-3 text-gray-500 hover:text-indigo-500"
-        >
-          {showPassword ? 'Hide' : 'Show'}
-        </button>
-        <div className="text-xs text-gray-500 mt-1">
-          <ul>
-            <li
-              className={`flex items-center ${/[A-Z]/.test(password) ? 'text-green-500' : 'text-red-500'}`}
-            >
-              {/[A-Z]/.test(password) ? '✓' : '✗'} One uppercase letter
-            </li>
-            <li
-              className={`flex items-center ${/[a-z]/.test(password) ? 'text-green-500' : 'text-red-500'}`}
-            >
-              {/[a-z]/.test(password) ? '✓' : '✗'} One lowercase letter
-            </li>
-            <li
-              className={`flex items-center ${/[!@#$%^&*()]/.test(password) ? 'text-green-500' : 'text-red-500'}`}
-            >
-              {/[!@#$%^&*()]/.test(password) ? '✓' : '✗'} One special character
-            </li>
-            <li
-              className={`flex items-center ${password.length >= 8 ? 'text-green-500' : 'text-red-500'}`}
-            >
-              {password.length >= 8 ? '✓' : '✗'} Minimum 8 characters
-            </li>
-          </ul>
-        </div>
-      </div>
+              {isRegistering && (
+                <>
+                  {}
+                  <div className="flex space-x-4">
+                    {}
+                    <div className="relative flex-1">
+                      <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                        Password:
+                      </label>
+                      <input
+                        id="password"
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        className="signup-password-field w-full px-4 py-2 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        className="absolute top-9 right-3 text-gray-500 hover:text-indigo-500"
+                      >
+                        {showPassword ? 'Hide' : 'Show'}
+                      </button>
+                      <div className="text-xs text-gray-500 mt-1">
+                        <ul>
+                          <li
+                            className={`flex items-center ${/[A-Z]/.test(password) ? 'text-green-500' : 'text-red-500'}`}
+                          >
+                            {/[A-Z]/.test(password) ? '✓' : '✗'} One uppercase letter
+                          </li>
+                          <li
+                            className={`flex items-center ${/[a-z]/.test(password) ? 'text-green-500' : 'text-red-500'}`}
+                          >
+                            {/[a-z]/.test(password) ? '✓' : '✗'} One lowercase letter
+                          </li>
+                          <li
+                            className={`flex items-center ${/[!@#$%^&*()]/.test(password) ? 'text-green-500' : 'text-red-500'}`}
+                          >
+                            {/[!@#$%^&*()]/.test(password) ? '✓' : '✗'} One special character
+                          </li>
+                          <li
+                            className={`flex items-center ${password.length >= 8 ? 'text-green-500' : 'text-red-500'}`}
+                          >
+                            {password.length >= 8 ? '✓' : '✗'} Minimum 8 characters
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
 
-      {/* Retype Password Field with Match Indicator and Toggle */}
-      <div className="relative flex-1">
-        <label htmlFor="retypePassword" className="block text-sm font-medium text-gray-700">
-          Retype Password:
-        </label>
-        <input
-          id="retypePassword"
-          type={showRetypePassword ? 'text' : 'password'}
-          value={retypePassword}
-          onChange={(e) => setRetypePassword(e.target.value)}
-          required
-          className="signup-retype-password-field w-full px-4 py-2 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-        />
-        <button
-          type="button"
-          onClick={() => setShowRetypePassword((prev) => !prev)}
-          className="absolute top-9 right-3 text-gray-500 hover:text-indigo-500"
-        >
-          {showRetypePassword ? 'Hide' : 'Show'}
-        </button>
-        <div className="text-xs mt-1">
-          <p
-            className={`flex items-center ${password === retypePassword && retypePassword !== '' ? 'text-green-500' : 'text-red-500'}`}
-          >
-            {password === retypePassword && retypePassword !== ''
-              ? '✓ Passwords match'
-              : '✗ Passwords do not match'}
-          </p>
-        </div>
-      </div>
-    </div>
-  </>
-)}
+                    {}
+                    <div className="relative flex-1">
+                      <label htmlFor="retypePassword" className="block text-sm font-medium text-gray-700">
+                        Retype Password:
+                      </label>
+                      <input
+                        id="retypePassword"
+                        type={showRetypePassword ? 'text' : 'password'}
+                        value={retypePassword}
+                        onChange={(e) => setRetypePassword(e.target.value)}
+                        required
+                        className="signup-retype-password-field w-full px-4 py-2 mt-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowRetypePassword((prev) => !prev)}
+                        className="absolute top-9 right-3 text-gray-500 hover:text-indigo-500"
+                      >
+                        {showRetypePassword ? 'Hide' : 'Show'}
+                      </button>
+                      <div className="text-xs mt-1">
+                        <p
+                          className={`flex items-center ${password === retypePassword && retypePassword !== '' ? 'text-green-500' : 'text-red-500'}`}
+                        >
+                          {password === retypePassword && retypePassword !== ''
+                            ? '✓ Passwords match'
+                            : '✗ Passwords do not match'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
 
               {errorMessage && (
                 <p className="text-red-500 text-sm mt-2">{errorMessage}</p>

@@ -1,11 +1,10 @@
 const mysql = require('mysql');
 
-// Database Connection
 const db = mysql.createConnection({
-  host: '127.0.0.1', // Your database host
-  user: 'root',      // Your database username
-  password: '',      // Your database password
-  database: 'user'   // Your database name
+  host: '127.0.0.1', 
+  user: 'root',     
+  password: '',    
+  database: 'user'  
 });
 
 db.connect((err) => {

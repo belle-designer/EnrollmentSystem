@@ -10,15 +10,13 @@ import Admission from './pages/Admission';
 function App() {
   const [user, setUser] = useState(null);
 
-  // Define the regex for student email format
   const studentEmailRegex = /^bc\.[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@cvsu\.edu\.ph$/;
 
-  // Load the user from localStorage if it exists
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       const parsedUser = JSON.parse(storedUser);
-      setUser(parsedUser); // Load the user from localStorage on page reload
+      setUser(parsedUser);
     }
   }, []);
 
@@ -27,15 +25,14 @@ function App() {
     localStorage.removeItem('user');
   };
 
-  // Determine the navigation path based on user role and email
   const getNavigationPath = (user) => {
-    if (!user) return '/'; // If no user exists, go to login page
+    if (!user) return '/';
 
     if (user.role === 'Student') {
       if (studentEmailRegex.test(user.email)) {
-        return '/StudentDashboard'; // Navigate to student dashboard if email matches
+        return '/StudentDashboard'; 
       } else {
-        return '/Admission'; // Navigate to Admission page if email doesn't match
+        return '/Admission'; 
       }
     }
 
@@ -52,16 +49,16 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Login Route */}
+        {}
         <Route
           path="/"
           element={<Login setUser={(user) => {
-            setUser(user);  // Update the user state
-            localStorage.setItem('user', JSON.stringify(user)); // Store user data in localStorage
+            setUser(user); 
+            localStorage.setItem('user', JSON.stringify(user)); 
           }} />}
         />
 
-        {/* Dynamic Navigation Route */}
+        {}
         <Route
           path="/dashboard"
           element={user ? (
@@ -71,7 +68,7 @@ function App() {
           )}
         />
 
-        {/* Protected Routes */}
+        {}
         <Route
           path="/StudentDashboard"
           element={user && user.role === 'Student' ? (
@@ -95,7 +92,7 @@ function App() {
           element={user && user.role === 'Officer' ? <OfficerDashboard logout={handleLogout} /> : <Navigate to="/" />}
         />
 
-        {/* Admission Page for Students */}
+        {}
         <Route
           path="/Admission"
           element={user && user.role === 'Student' && !studentEmailRegex.test(user.email) ? <Admission /> : <Navigate to="/" />}
